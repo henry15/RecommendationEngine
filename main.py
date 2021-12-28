@@ -26,7 +26,11 @@ def recommendation(num1):
 
 @eel.expose
 def get_data(inp):
-    return ""
+    data = pd.read_excel('./CategoryNamesList.xlsx', sheet_name='CategoryNamesList')
+    #data = pd.read_csv('D:/ISM/structureValidatingProcedures/Task3DataSet/Strukturbaum_Namen.csv',encoding='cp1252', dtype='unicode')
+                       
+    df = pd.DataFrame(data, columns= ['category_en','category_id'])
+    return  (df.to_json())
 
 
 #@app.route("/home")

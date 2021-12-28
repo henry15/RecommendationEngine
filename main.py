@@ -38,5 +38,5 @@ def get_data(inp):
 #    suggestions = get_suggestions()
 #    return render_template('home.html',suggestions=suggestions)
 
-eel.start('index.html', mode='edge')
+eel.start('index.html', mode='edge', port=9002)
 

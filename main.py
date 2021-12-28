@@ -13,6 +13,12 @@ import numpy as np
 import requests
 from flask import Flask, render_template, request
 
+app= Flask(__name__, template_folder='web')
+
+@app.route('/')
+def index():
+  return render_template('index.html')
+
 eel.init('web')
 
 
@@ -33,10 +39,6 @@ def get_data(inp):
     return  (df.to_json())
 
 
-#@app.route("/home")
-#def home():
-#    suggestions = get_suggestions()
-#    return render_template('home.html',suggestions=suggestions)
-
-eel.start('index.html', mode='edge')
-
+if __name__ == '__main__':
+  app.debug = True
+  app.run()

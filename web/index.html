@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+</style>
+<link rel="stylesheet" href="style.css">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src = "http://malsup.github.io/jquery.blockUI.js"></script>
+<script type="text/javascript" src="./eel.js"> </script>
+<script type="text/javascript" src="main.js"> </script>
+</head>     
+<body>
+
+<h2>Recommendation Engine</h2>
+
+
+
+  <div class="autocomplete" style="width:300px;">
+    <input id="myInput" type="text" name="myCountry" placeholder="Enter Category">
+  </div>
+ 
+  <input type="button" onclick="Search()" value="Search" />
+
+
+<div id="loader"></div>
+<br/><br/><br/>
+
+<br/>
+<div id="RecommendationDiv">
+<p> Top 10 recommended categories are:</p>
+</div>
+</body>
+</html>

@@ -6,37 +6,34 @@ Created on Fri Dec 17 23:27:57 2021
 """
 # install eel
 
-
-import eel
+from bottle import redirect, template
 import pandas as pd
 import numpy as np
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
-eel.init('web')
+app= Flask(__name__) #, template_folder='web')
 
+@app.route('/')
+def index():
+  return render_template('index.html')
 
-@eel.expose
+@app.route('/recommendation', methods=['GET'])
 def recommendation(num1): 
   #response = requests.get("http://localhost:8000/sum")
-  response = requests.post("http://localhost:8000/Recommendation", data ={'input':num1})
-  print(response)
+  response = requests.post("/Recommendation", data ={'input':num1})
   return response.json()
 
 
-@eel.expose
-def get_data(inp):
+#@eel.expose
+@app.route('/getExcelData', methods=['GET'])
+def get_data():
     data = pd.read_excel('./CategoryNamesList.xlsx', sheet_name='CategoryNamesList')
     #data = pd.read_csv('D:/ISM/structureValidatingProcedures/Task3DataSet/Strukturbaum_Namen.csv',encoding='cp1252', dtype='unicode')
                        
     df = pd.DataFrame(data, columns= ['category_en','category_id'])
     return  (df.to_json()) #render_template('index.html', suggestions=df) 
 
-
-#@app.route("/home")
-#def home():
-#    suggestions = get_suggestions()
-#    return render_template('home.html',suggestions=suggestions)
-
-eel.start('index.html', host='localhost', port=9090)
-
+if __name__ == '__main__':
+  app.debug = True
+  app.run()

@@ -106,11 +106,15 @@ function autocomplete(inp, arr) {
 
     document.getElementById("loader").style.display = "block";
     $.blockUI({ message: "Please wait few secs. Category data is getting loaded" }); 
-        
-    eel.get_data('')(function(ret){         
-       
-        var catName = JSON.parse(ret)['category_en'];
-        var catId = JSON.parse(ret)['category_id'];
+    
+    $.ajax({
+      url:"/getExcelData",
+      type: "GET",
+      dataType: "json",
+      success: function(ret){
+        console.log(ret);
+        var catName = (ret)['category_en'];
+        var catId = (ret)['category_id'];
      
         var result = [];
            for(var i in catName){
@@ -122,11 +126,10 @@ function autocomplete(inp, arr) {
            }
          document.getElementById("loader").style.display = "none";
          $.unblockUI();
-         //   tags.push(json_data [i]);
-        //  console.log(map);
      /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-       
+      }
     });
+    
 
       autocomplete(document.getElementById("myInput"), tags);
     

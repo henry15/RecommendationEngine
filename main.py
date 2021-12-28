@@ -32,7 +32,7 @@ def get_data():
     #data = pd.read_csv('D:/ISM/structureValidatingProcedures/Task3DataSet/Strukturbaum_Namen.csv',encoding='cp1252', dtype='unicode')
                        
     df = pd.DataFrame(data, columns= ['category_en','category_id'])
-    return  (df.to_json()) #render_template('index.html', suggestions=df) 
+    return  (df.to_json())
 
 if __name__ == '__main__':
   app.debug = True

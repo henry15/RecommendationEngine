@@ -23,7 +23,7 @@ def recommendation():
   paras={"input": request.args.get('inp')}
   #response = requests.get("http://localhost:8000/sum")
   response = requests.post("https://rmodel-recommendation.herokuapp.com/analyse", params= paras)
-  return response.json()
+  return response.text
 
 
 #@eel.expose

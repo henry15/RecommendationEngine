@@ -112,7 +112,7 @@ function autocomplete(inp, arr) {
       type: "GET",
       dataType: "json",
       success: function(ret){
-        console.log(ret);
+        //console.log(ret);
         var catName = (ret)['category_en'];
         var catId = (ret)['category_id'];
      
@@ -128,10 +128,8 @@ function autocomplete(inp, arr) {
          $.unblockUI();
      /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
       }
-    });
-    
-
-      autocomplete(document.getElementById("myInput"), tags);
+    });  
+     autocomplete(document.getElementById("myInput"), tags);
     
  
 });
@@ -143,12 +141,23 @@ function autocomplete(inp, arr) {
            document.getElementById("loader").style.display = "block";
            $.blockUI({ message: "Recommendation engine in progress" }); 
   
-          eel.recommendation(inp)(function(ret){  
-           var res=JSON.parse(ret[0]);    
-           AddRows(res);
+          //  fetch('/recommendation/${inp}')
+          //  .then(function (response) {
+          //      console.log(response);
+          //  });
+           $.ajax({
+            url:"/recommendation",
+            type: "GET",
+            dataType: "json",
+            data: { 'inp': inp},
+            success: function(ret){
+             console.log(ret)
+              var res=JSON.parse(ret[0]);    
+             AddRows(res);
               document.getElementById("loader").style.display = "none";
               $.unblockUI();
-          });
+            }
+            });
     };
     
     function AddRows(data){

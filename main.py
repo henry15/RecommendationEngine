@@ -21,7 +21,7 @@ def index():
 @app.route('/recommendation', methods=['GET'])
 def recommendation(num1): 
   #response = requests.get("http://localhost:8000/sum")
-  response = requests.post("https://rmodel-recommendation.herokuapp.com/Recommendation", data ={'input':num1})
+  response = requests.post("https://rmodel-recommendation.herokuapp.com/analyse", data ={'input':num1})
   return response.json()
 
 

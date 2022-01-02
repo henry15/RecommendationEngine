@@ -19,9 +19,10 @@ def index():
   return render_template('index.html')
 
 @app.route('/recommendation', methods=['GET'])
-def recommendation(num1): 
+def recommendation(): 
+  paras={"input": request.args.get('inp')}
   #response = requests.get("http://localhost:8000/sum")
-  response = requests.post("https://rmodel-recommendation.herokuapp.com/analyse", data ={'input':num1})
+  response = requests.post("https://rmodel-recommendation.herokuapp.com/analyse", , params= paras)
   return response.json()
 
 

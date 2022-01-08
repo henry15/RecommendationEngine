@@ -13,22 +13,24 @@
 <body>
 
 <h2>Recommendation Engine</h2>
-
-
-
+  <div>
+  <input type="text" id="selectedCats" width="70%" readonly  placeholder="Selected values" />
+  </div>   
+    <br/><br/>
   <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="myCountry" placeholder="Enter Category">
+    
+    <input id="myInput" type="text" name="myCountry" placeholder="Select Category" />
   </div>
  
   <input type="button" onclick="Search()" value="Search" />
-
+  <input type="button" onclick="Reset()" value="Reset" />
 
 <div id="loader"></div>
 <br/><br/><br/>
 
 <br/>
+<p> Top recommended categories are:</p>
 <div id="RecommendationDiv">
-<p> Top 10 recommended categories are:</p>
 </div>
 </body>
 </html>

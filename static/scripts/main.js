@@ -36,7 +36,11 @@ function autocomplete(inp, arr) {
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
               /*insert the value for the autocomplete text field:*/
-              inp.value = this.getElementsByTagName("input")[0].value;
+              inp.value =  "";// this.getElementsByTagName("input")[0].value;
+              if( document.getElementById("selectedCats").value == "")
+                document.getElementById("selectedCats").value = this.getElementsByTagName("input")[0].value; 
+              else
+                document.getElementById("selectedCats").value = document.getElementById("selectedCats").value +','+this.getElementsByTagName("input")[0].value; 
               /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
               closeAllLists();
@@ -136,8 +140,16 @@ function autocomplete(inp, arr) {
 
 
     function Search(){    
-        var srchTxt=document.getElementById("myInput").value;
-         var inp= map.get(srchTxt);
+        var srchTxt=document.getElementById("selectedCats").value;
+        var catgs = srchTxt.split(',');
+        var inp = '';
+        for(a=0; a< catgs.length; a++){
+          if(inp == '')
+            inp = map.get(catgs[a]);
+          else
+            inp = inp + ',' + map.get(catgs[a]);
+        }
+        console.log(inp)
            document.getElementById("loader").style.display = "block";
            $.blockUI({ message: "Recommendation engine in progress" }); 
   
@@ -160,6 +172,10 @@ function autocomplete(inp, arr) {
             });
     };
     
+    function Reset(){
+      document.getElementById("selectedCats").value="";
+    }
+
     function AddRows(data){
          // EXTRACT VALUE FOR HTML HEADER. 
         var col = [];
